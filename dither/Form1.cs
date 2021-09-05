@@ -14,7 +14,7 @@ namespace dither
 {
     public partial class Form1 : Form
     {
-        private string _path = "0.png";
+        private string _path = "standart.png";
         private bool _DoBW = true;
         private string[] SizeMods = new string[] { "Normal", "StretchImage", "AutoSize", "CenterImage", "Zoom" };
 
