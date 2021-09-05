@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace dither
     {
         private string _path = "0.png";
         private bool _DoBW = true;
+        private string[] SizeMods = new string[] { "Normal", "StretchImage", "AutoSize", "CenterImage", "Zoom" };
 
         private Bitmap _primordialImage;
         private Bitmap _modifiedImage;
@@ -31,8 +33,6 @@ namespace dither
 
         private Bitmap ImageRender(Bitmap Img)
         {
-
-
             return Img;
         }
 
@@ -66,7 +66,7 @@ namespace dither
 
         private double closestStep(int max, int steps, int value)
         {
-            return Math.Round((steps * value) /255 * Math.Floor(255 / (double)steps));
+            return Math.Round((steps * value) / 255 * Math.Floor(255 / (double)steps));
         }
 
         private void makeDithered(Bitmap img, int steps)
@@ -138,11 +138,29 @@ namespace dither
         {
             Primordial_Image.Image = new Bitmap(_path, true);
             Modified_Image.Image = new Bitmap(_path, true);
+
+            var OPF = new OpenFileDialog();
+            OPF.Filter = "Файлы .png|*.png|Файлы .jpg|*.jpg";
+            if (OPF.ShowDialog() == DialogResult.OK)
+            {
+                _path = OPF.FileName;
+                _modifiedImage = new Bitmap(_path, true);
+                _primordialImage = new Bitmap(_path, true);
+                Primordial_Image.Image = _primordialImage;
+                Modified_Image.Image = _modifiedImage;//центр стреч нормал
+            }
+            else
+            {
+                OPF.Dispose();
+            }
         }
 
         private void Save_Button_Click(object sender, EventArgs e)
         {
+            var standartFilePath = $"{Directory.GetCurrentDirectory()}/Img/PostImage.jpg";
 
+            Modified_Image.Image.Save(standartFilePath);
+            MessageBox.Show($"Image saved in {standartFilePath}");
         }
 
         private void Method_Selector_CheckStateChanged(object sender, EventArgs e)
@@ -154,6 +172,30 @@ namespace dither
             else
             {
                 _DoBW = true;
+            }
+        }
+
+        private void SizeModBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (SizeModBox.SelectedIndex)
+            {
+                case 0:{
+                        Primordial_Image.SizeMode = PictureBoxSizeMode.Normal;
+                        Modified_Image.SizeMode = PictureBoxSizeMode.Normal;
+                        break;
+                    }
+                case 1:
+                    {
+                        Primordial_Image.SizeMode = PictureBoxSizeMode.StretchImage;
+                        Modified_Image.SizeMode = PictureBoxSizeMode.StretchImage;
+                        break;
+                    }
+                case 2:
+                    {
+                        Primordial_Image.SizeMode = PictureBoxSizeMode.CenterImage;
+                        Modified_Image.SizeMode = PictureBoxSizeMode.CenterImage;
+                        break;
+                    }
             }
         }
     }

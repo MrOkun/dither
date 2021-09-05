@@ -29,72 +29,61 @@ namespace dither
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Primordia_Image_Plane = new System.Windows.Forms.Panel();
-            this.Modified_Image = new System.Windows.Forms.PictureBox();
             this.Primordial_Image = new System.Windows.Forms.PictureBox();
+            this.Modified_Image = new System.Windows.Forms.PictureBox();
             this.Modified_Image_Plane = new System.Windows.Forms.Panel();
-            this.Save_Button = new System.Windows.Forms.Button();
             this.Load_Button = new System.Windows.Forms.Button();
             this.Dither = new System.Windows.Forms.Button();
             this.Steps_Bar = new System.Windows.Forms.TrackBar();
             this.Method_Selector = new System.Windows.Forms.CheckBox();
+            this.Save_Button = new System.Windows.Forms.Button();
+            this.SizeModBox = new System.Windows.Forms.ComboBox();
             this.Primordia_Image_Plane.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Primordial_Image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).BeginInit();
             this.Modified_Image_Plane.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Steps_Bar)).BeginInit();
             this.SuspendLayout();
             // 
             // Primordia_Image_Plane
             // 
-            this.Primordia_Image_Plane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(60)))), ((int)(((byte)(143)))));
+            this.Primordia_Image_Plane.BackColor = System.Drawing.Color.Gray;
             this.Primordia_Image_Plane.Controls.Add(this.Primordial_Image);
             this.Primordia_Image_Plane.Location = new System.Drawing.Point(12, 12);
             this.Primordia_Image_Plane.Name = "Primordia_Image_Plane";
             this.Primordia_Image_Plane.Size = new System.Drawing.Size(310, 310);
             this.Primordia_Image_Plane.TabIndex = 0;
             // 
-            // Modified_Image
-            // 
-            this.Modified_Image.Location = new System.Drawing.Point(3, 3);
-            this.Modified_Image.Name = "Modified_Image";
-            this.Modified_Image.Size = new System.Drawing.Size(304, 304);
-            this.Modified_Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Modified_Image.TabIndex = 0;
-            this.Modified_Image.TabStop = false;
-            // 
             // Primordial_Image
             // 
+            this.Primordial_Image.Image = ((System.Drawing.Image)(resources.GetObject("Primordial_Image.Image")));
             this.Primordial_Image.Location = new System.Drawing.Point(3, 3);
             this.Primordial_Image.Name = "Primordial_Image";
             this.Primordial_Image.Size = new System.Drawing.Size(304, 304);
-            this.Primordial_Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Primordial_Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.Primordial_Image.TabIndex = 0;
             this.Primordial_Image.TabStop = false;
             // 
+            // Modified_Image
+            // 
+            this.Modified_Image.Image = ((System.Drawing.Image)(resources.GetObject("Modified_Image.Image")));
+            this.Modified_Image.Location = new System.Drawing.Point(3, 3);
+            this.Modified_Image.Name = "Modified_Image";
+            this.Modified_Image.Size = new System.Drawing.Size(304, 304);
+            this.Modified_Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.Modified_Image.TabIndex = 0;
+            this.Modified_Image.TabStop = false;
+            // 
             // Modified_Image_Plane
             // 
-            this.Modified_Image_Plane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(60)))), ((int)(((byte)(143)))));
+            this.Modified_Image_Plane.BackColor = System.Drawing.Color.Gray;
             this.Modified_Image_Plane.Controls.Add(this.Modified_Image);
             this.Modified_Image_Plane.Location = new System.Drawing.Point(328, 12);
             this.Modified_Image_Plane.Name = "Modified_Image_Plane";
             this.Modified_Image_Plane.Size = new System.Drawing.Size(310, 310);
             this.Modified_Image_Plane.TabIndex = 1;
-            // 
-            // Save_Button
-            // 
-            this.Save_Button.BackColor = System.Drawing.Color.White;
-            this.Save_Button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Save_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Save_Button.Font = new System.Drawing.Font("Montserrat Thin", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Save_Button.ForeColor = System.Drawing.Color.Black;
-            this.Save_Button.Location = new System.Drawing.Point(178, 393);
-            this.Save_Button.Name = "Save_Button";
-            this.Save_Button.Size = new System.Drawing.Size(141, 46);
-            this.Save_Button.TabIndex = 2;
-            this.Save_Button.Text = "Save";
-            this.Save_Button.UseVisualStyleBackColor = false;
-            this.Save_Button.Click += new System.EventHandler(this.Save_Button_Click);
             // 
             // Load_Button
             // 
@@ -147,12 +136,43 @@ namespace dither
             this.Method_Selector.UseVisualStyleBackColor = true;
             this.Method_Selector.CheckStateChanged += new System.EventHandler(this.Method_Selector_CheckStateChanged);
             // 
+            // Save_Button
+            // 
+            this.Save_Button.BackColor = System.Drawing.Color.White;
+            this.Save_Button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Save_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Save_Button.Font = new System.Drawing.Font("Montserrat Thin", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Save_Button.ForeColor = System.Drawing.Color.Black;
+            this.Save_Button.Location = new System.Drawing.Point(178, 393);
+            this.Save_Button.Name = "Save_Button";
+            this.Save_Button.Size = new System.Drawing.Size(141, 46);
+            this.Save_Button.TabIndex = 2;
+            this.Save_Button.Text = "Save";
+            this.Save_Button.UseVisualStyleBackColor = false;
+            this.Save_Button.Click += new System.EventHandler(this.Save_Button_Click);
+            // 
+            // SizeModBox
+            // 
+            this.SizeModBox.DisplayMember = "3";
+            this.SizeModBox.FormattingEnabled = true;
+            this.SizeModBox.Items.AddRange(new object[] {
+            "Normal",
+            "StretchImage",
+            "CenterImage (Default)"});
+            this.SizeModBox.Location = new System.Drawing.Point(331, 326);
+            this.SizeModBox.Name = "SizeModBox";
+            this.SizeModBox.Size = new System.Drawing.Size(153, 21);
+            this.SizeModBox.TabIndex = 7;
+            this.SizeModBox.Text = "CenterImage (Default)";
+            this.SizeModBox.SelectedIndexChanged += new System.EventHandler(this.SizeModBox_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(101)))), ((int)(((byte)(192)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(653, 451);
+            this.Controls.Add(this.SizeModBox);
             this.Controls.Add(this.Method_Selector);
             this.Controls.Add(this.Steps_Bar);
             this.Controls.Add(this.Dither);
@@ -163,8 +183,8 @@ namespace dither
             this.Name = "Form1";
             this.Text = "Form1";
             this.Primordia_Image_Plane.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Primordial_Image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).EndInit();
             this.Modified_Image_Plane.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Steps_Bar)).EndInit();
             this.ResumeLayout(false);
@@ -178,11 +198,12 @@ namespace dither
         private System.Windows.Forms.PictureBox Modified_Image;
         private System.Windows.Forms.PictureBox Primordial_Image;
         private System.Windows.Forms.Panel Modified_Image_Plane;
-        private System.Windows.Forms.Button Save_Button;
         private System.Windows.Forms.Button Load_Button;
         private System.Windows.Forms.Button Dither;
         private System.Windows.Forms.TrackBar Steps_Bar;
         private System.Windows.Forms.CheckBox Method_Selector;
+        private System.Windows.Forms.Button Save_Button;
+        private System.Windows.Forms.ComboBox SizeModBox;
     }
 }
 
