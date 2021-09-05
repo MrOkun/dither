@@ -180,8 +180,9 @@ namespace dither
             this.Controls.Add(this.Save_Button);
             this.Controls.Add(this.Modified_Image_Plane);
             this.Controls.Add(this.Primordia_Image_Plane);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Dither";
             this.Primordia_Image_Plane.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Primordial_Image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).EndInit();

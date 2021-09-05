@@ -27,10 +27,15 @@ namespace dither
 
             Primordial_Image.Image = new Bitmap(_path, true);
             Modified_Image.Image = new Bitmap(_path, true);
+
+            if (!Directory.Exists("Img"))
+            {
+                Directory.CreateDirectory("Img");
+            }
         }
 
 
-
+          
         private Bitmap ImageRender(Bitmap Img)
         {
             return Img;
