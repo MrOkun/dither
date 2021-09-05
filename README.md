@@ -9,3 +9,5 @@ Screenshots :
 Programm screenshot :
 
 ![Alt text](http://images.vfl.ru/ii/1630868055/993a455f/35747653.png "Program")
+
+Powered by Windows Forms with C-Sharp Language.
