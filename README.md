@@ -1,6 +1,6 @@
 # dither
 
-Floyd-Steinberg dithering for godlike os - windows, written on c# (WinForms).
+Floyd-Steinberg dithering for godlike OS - Windows 10, written on c# (WinForms).
 
 Screenshots : 
 
