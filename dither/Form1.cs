@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -34,39 +35,25 @@ namespace dither
             }
         }
 
-
-          
-        private Bitmap ImageRender(Bitmap Img)
-        {
-            return Img;
-        }
-
         private void Dither_Click(object sender, EventArgs e)
         {
             _modifiedImage = new Bitmap(_path, true);
+            var factor = Steps_Bar.Value;
 
-            makeDithered(_modifiedImage, Steps_Bar.Value);
+            Thread thread = new Thread(
+                    () => makeDithered(_modifiedImage, factor));
+            thread.Start();
+            
+            
+            /*
+            Thread thread = new Thread(
+        () => makeDithered(_modifiedImage, factor));
+            thread.Start(); */
             //_DoBW
 
-            if (!_DoBW)
-            {
-                int x, y;
 
-                for (x = 0; x < _modifiedImage.Width; x++)
-                {
-                    for (y = 0; y < _modifiedImage.Height; y++)
-                    {
-                        Color pixelColor1 = _modifiedImage.GetPixel(x, y);
 
-                        int grayscaleColor = (pixelColor1.R + pixelColor1.G + pixelColor1.B) / 3;
-
-                        Color newColor = Color.FromArgb(grayscaleColor, grayscaleColor, grayscaleColor);
-                        _modifiedImage.SetPixel(x, y, newColor);
-                    }
-                }
-            }
-
-            Modified_Image.Image = _modifiedImage;
+            //Modified_Image.Image = _modifiedImage;
         }
 
         private double closestStep(int max, int steps, int value)
@@ -74,8 +61,10 @@ namespace dither
             return Math.Round((steps * value) / 255 * Math.Floor(255 / (double)steps));
         }
 
-        private void makeDithered(Bitmap img, int steps)
+        private void makeDithered(Bitmap img1, int steps)
         {
+            Bitmap img = (Bitmap)img1.Clone();
+
             for (var y = 0; y < img.Height; y++)
             {
                 for (var x = 0; x < img.Width; x++)
@@ -98,6 +87,7 @@ namespace dither
                     distributeError(img, x, y, errR, errG, errB);
                 }
             }
+            Modified_Image.Image = img;
         }
 
         private void distributeError(Bitmap img, int x, int y, double errR, double errG, double errB)
