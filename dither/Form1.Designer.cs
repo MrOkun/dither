@@ -40,11 +40,13 @@ namespace dither
             this.Method_Selector = new System.Windows.Forms.CheckBox();
             this.Save_Button = new System.Windows.Forms.Button();
             this.SizeModBox = new System.Windows.Forms.ComboBox();
+            this.LoadBox = new System.Windows.Forms.PictureBox();
             this.Primordia_Image_Plane.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Primordial_Image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).BeginInit();
             this.Modified_Image_Plane.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Steps_Bar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadBox)).BeginInit();
             this.SuspendLayout();
             // 
             // Primordia_Image_Plane
@@ -75,6 +77,7 @@ namespace dither
             this.Modified_Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.Modified_Image.TabIndex = 0;
             this.Modified_Image.TabStop = false;
+            this.Modified_Image.Paint += new System.Windows.Forms.PaintEventHandler(this.Modified_Image_OnPaint);
             // 
             // Modified_Image_Plane
             // 
@@ -166,12 +169,23 @@ namespace dither
             this.SizeModBox.Text = "CenterImage (Default)";
             this.SizeModBox.SelectedIndexChanged += new System.EventHandler(this.SizeModBox_SelectedIndexChanged);
             // 
+            // LoadBox
+            // 
+            this.LoadBox.Image = ((System.Drawing.Image)(resources.GetObject("LoadBox.Image")));
+            this.LoadBox.Location = new System.Drawing.Point(438, 393);
+            this.LoadBox.Name = "LoadBox";
+            this.LoadBox.Size = new System.Drawing.Size(46, 46);
+            this.LoadBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.LoadBox.TabIndex = 8;
+            this.LoadBox.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(653, 451);
+            this.Controls.Add(this.LoadBox);
             this.Controls.Add(this.SizeModBox);
             this.Controls.Add(this.Method_Selector);
             this.Controls.Add(this.Steps_Bar);
@@ -188,6 +202,7 @@ namespace dither
             ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).EndInit();
             this.Modified_Image_Plane.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Steps_Bar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,6 +220,7 @@ namespace dither
         private System.Windows.Forms.CheckBox Method_Selector;
         private System.Windows.Forms.Button Save_Button;
         private System.Windows.Forms.ComboBox SizeModBox;
+        private System.Windows.Forms.PictureBox LoadBox;
     }
 }
 

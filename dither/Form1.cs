@@ -17,6 +17,7 @@ namespace dither
     {
         private string _path = "standart.png";
         private bool _DoBW = true;
+        private bool _dithering = false;
         private string[] SizeMods = new string[] { "Normal", "StretchImage", "AutoSize", "CenterImage", "Zoom" };
 
         private Bitmap _primordialImage;
@@ -25,6 +26,8 @@ namespace dither
         public Form1()
         {
             InitializeComponent();
+
+            LoadBox.Visible = false;
 
             Primordial_Image.Image = new Bitmap(_path, true);
             Modified_Image.Image = new Bitmap(_path, true);
@@ -37,14 +40,26 @@ namespace dither
 
         private void Dither_Click(object sender, EventArgs e)
         {
+            Debug.WriteLine("Считал нажатие на кнопку!");
             _modifiedImage = new Bitmap(_path, true);
             var factor = Steps_Bar.Value;
 
-            Thread thread = new Thread(
+            if (!_dithering)
+            {
+                Debug.WriteLine("Проверку прошёл!");
+
+                LoadBox.Visible = true;
+                _dithering = true;
+
+                Thread thread = new Thread(
                     () => makeDithered(_modifiedImage, factor));
-            thread.Start();
-            
-            
+                thread.Start();
+            }
+            else
+            {
+                Debug.WriteLine("Проверку не прошёл!");
+            }
+
             /*
             Thread thread = new Thread(
         () => makeDithered(_modifiedImage, factor));
@@ -63,11 +78,13 @@ namespace dither
 
         private void makeDithered(Bitmap img1, int steps)
         {
+            int x, y;
+
             Bitmap img = (Bitmap)img1.Clone();
 
-            for (var y = 0; y < img.Height; y++)
+            for (y = 0; y < img.Height; y++)
             {
-                for (var x = 0; x < img.Width; x++)
+                for (x = 0; x < img.Width; x++)
                 {
                     var clr = img.GetPixel(x, y);
                     var oldR = clr.R;
@@ -87,7 +104,28 @@ namespace dither
                     distributeError(img, x, y, errR, errG, errB);
                 }
             }
+
+
+            if (!_DoBW)
+            {
+                for (x = 0; x < img.Width; x++)
+                {
+                    for (y = 0; y < img.Height; y++)
+                    {
+                        Color pixelColor = img.GetPixel(x, y);
+                        var grayscaleColor = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
+
+                        Color newColor = Color.FromArgb(grayscaleColor, grayscaleColor, grayscaleColor);
+
+                        img.SetPixel(x, y, newColor);
+                    }
+                }
+            }
+
+
             Modified_Image.Image = img;
+
+            _dithering = false;
         }
 
         private void distributeError(Bitmap img, int x, int y, double errR, double errG, double errB)
@@ -127,7 +165,6 @@ namespace dither
 
             img.SetPixel(x, y, newClr);
         }
-
 
         private void Load_Button_Click(object sender, EventArgs e)
         {
@@ -174,7 +211,8 @@ namespace dither
         {
             switch (SizeModBox.SelectedIndex)
             {
-                case 0:{
+                case 0:
+                    {
                         Primordial_Image.SizeMode = PictureBoxSizeMode.Normal;
                         Modified_Image.SizeMode = PictureBoxSizeMode.Normal;
                         break;
@@ -191,6 +229,14 @@ namespace dither
                         Modified_Image.SizeMode = PictureBoxSizeMode.CenterImage;
                         break;
                     }
+            }
+        }
+
+        private void Modified_Image_OnPaint(object sender, PaintEventArgs e)
+        {
+            if (!_dithering)
+            {
+                LoadBox.Visible = false;
             }
         }
     }
