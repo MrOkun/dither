@@ -18,10 +18,10 @@ namespace dither
         private string _path = "standart.png";
         private bool _DoBW = true;
         private bool _dithering = false;
-        private string[] SizeMods = new string[] { "Normal", "StretchImage", "AutoSize", "CenterImage", "Zoom" };
+        private int _DoPer = 0;
 
-        private Bitmap _primordialImage;
-        private Bitmap _modifiedImage;
+        private Bitmap _primordialImage = new Bitmap("standart.png", true);
+        private Bitmap _modifiedImage = new Bitmap("standart.png", true);
 
         public Form1()
         {
@@ -36,12 +36,24 @@ namespace dither
             {
                 Directory.CreateDirectory("Img");
             }
+
+            WidthLabel.Text = $"Width : {_modifiedImage.Width}px";
+            HeightLabel.Text = $"Heigt : {_modifiedImage.Height}px";
+            PixelLable.Text = $"Pixel Count : {_modifiedImage.Width * _modifiedImage.Height}px";
         }
 
         private void Dither_Click(object sender, EventArgs e)
         {
+            _DoPer = 0;
+            PerSentCouner.Visible = true;
+
+
+
             Debug.WriteLine("Считал нажатие на кнопку!");
             _modifiedImage = new Bitmap(_path, true);
+
+
+
             var factor = Steps_Bar.Value;
 
             if (!_dithering)
@@ -78,6 +90,7 @@ namespace dither
 
         private void makeDithered(Bitmap img1, int steps)
         {
+            _DoPer = 0;
             int x, y;
 
             Bitmap img = (Bitmap)img1.Clone();
@@ -102,7 +115,9 @@ namespace dither
                     var errB = oldB - newB;
 
                     distributeError(img, x, y, errR, errG, errB);
+                    _DoPer += 1;
                 }
+                
             }
 
 
@@ -180,6 +195,10 @@ namespace dither
                 _primordialImage = new Bitmap(_path, true);
                 Primordial_Image.Image = _primordialImage;
                 Modified_Image.Image = _modifiedImage;//центр стреч нормал
+
+                WidthLabel.Text = $"Width : {_modifiedImage.Width}px";
+                HeightLabel.Text = $"Heigt : {_modifiedImage.Height}px";
+                PixelLable.Text = $"Pixel Count : {_modifiedImage.Width * _modifiedImage.Height}px";
             }
             else
             {
@@ -191,7 +210,13 @@ namespace dither
         {
             var standartFilePath = $"{Directory.GetCurrentDirectory()}/Img/PostImage.jpg";
 
-            Modified_Image.Image.Save(standartFilePath);
+            try{
+                Modified_Image.Image.Save(standartFilePath);
+            }
+            catch
+            {
+
+            }
             MessageBox.Show($"Image saved in {standartFilePath}");
         }
 
@@ -237,7 +262,13 @@ namespace dither
             if (!_dithering)
             {
                 LoadBox.Visible = false;
+                //PerSentCouner.Visible = false;
             }
+        }
+
+        private void PerSentTimer_Tick(object sender, EventArgs e)
+        {
+            PerSentCouner.Text = $"Number of rendered pixels : {_DoPer}.";
         }
     }
 }

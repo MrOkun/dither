@@ -29,6 +29,7 @@ namespace dither
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Primordia_Image_Plane = new System.Windows.Forms.Panel();
             this.Primordial_Image = new System.Windows.Forms.PictureBox();
@@ -41,6 +42,11 @@ namespace dither
             this.Save_Button = new System.Windows.Forms.Button();
             this.SizeModBox = new System.Windows.Forms.ComboBox();
             this.LoadBox = new System.Windows.Forms.PictureBox();
+            this.PerSentCouner = new System.Windows.Forms.Label();
+            this.PerSentTimer = new System.Windows.Forms.Timer(this.components);
+            this.WidthLabel = new System.Windows.Forms.Label();
+            this.HeightLabel = new System.Windows.Forms.Label();
+            this.PixelLable = new System.Windows.Forms.Label();
             this.Primordia_Image_Plane.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Primordial_Image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).BeginInit();
@@ -53,7 +59,7 @@ namespace dither
             // 
             this.Primordia_Image_Plane.BackColor = System.Drawing.Color.Gray;
             this.Primordia_Image_Plane.Controls.Add(this.Primordial_Image);
-            this.Primordia_Image_Plane.Location = new System.Drawing.Point(12, 12);
+            this.Primordia_Image_Plane.Location = new System.Drawing.Point(16, 33);
             this.Primordia_Image_Plane.Name = "Primordia_Image_Plane";
             this.Primordia_Image_Plane.Size = new System.Drawing.Size(310, 310);
             this.Primordia_Image_Plane.TabIndex = 0;
@@ -83,7 +89,7 @@ namespace dither
             // 
             this.Modified_Image_Plane.BackColor = System.Drawing.Color.Gray;
             this.Modified_Image_Plane.Controls.Add(this.Modified_Image);
-            this.Modified_Image_Plane.Location = new System.Drawing.Point(328, 12);
+            this.Modified_Image_Plane.Location = new System.Drawing.Point(332, 33);
             this.Modified_Image_Plane.Name = "Modified_Image_Plane";
             this.Modified_Image_Plane.Size = new System.Drawing.Size(310, 310);
             this.Modified_Image_Plane.TabIndex = 1;
@@ -95,7 +101,7 @@ namespace dither
             this.Load_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Load_Button.Font = new System.Drawing.Font("Montserrat Thin", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Load_Button.ForeColor = System.Drawing.Color.Black;
-            this.Load_Button.Location = new System.Drawing.Point(15, 393);
+            this.Load_Button.Location = new System.Drawing.Point(19, 414);
             this.Load_Button.Name = "Load_Button";
             this.Load_Button.Size = new System.Drawing.Size(141, 46);
             this.Load_Button.TabIndex = 3;
@@ -110,7 +116,7 @@ namespace dither
             this.Dither.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Dither.Font = new System.Drawing.Font("Montserrat Thin", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Dither.ForeColor = System.Drawing.Color.Black;
-            this.Dither.Location = new System.Drawing.Point(497, 393);
+            this.Dither.Location = new System.Drawing.Point(501, 414);
             this.Dither.Name = "Dither";
             this.Dither.Size = new System.Drawing.Size(141, 46);
             this.Dither.TabIndex = 4;
@@ -120,7 +126,8 @@ namespace dither
             // 
             // Steps_Bar
             // 
-            this.Steps_Bar.Location = new System.Drawing.Point(15, 328);
+            this.Steps_Bar.LargeChange = 1;
+            this.Steps_Bar.Location = new System.Drawing.Point(19, 349);
             this.Steps_Bar.Maximum = 20;
             this.Steps_Bar.Minimum = 1;
             this.Steps_Bar.Name = "Steps_Bar";
@@ -131,7 +138,7 @@ namespace dither
             // Method_Selector
             // 
             this.Method_Selector.AutoSize = true;
-            this.Method_Selector.Location = new System.Drawing.Point(555, 328);
+            this.Method_Selector.Location = new System.Drawing.Point(559, 349);
             this.Method_Selector.Name = "Method_Selector";
             this.Method_Selector.Size = new System.Drawing.Size(68, 17);
             this.Method_Selector.TabIndex = 5;
@@ -146,7 +153,7 @@ namespace dither
             this.Save_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Save_Button.Font = new System.Drawing.Font("Montserrat Thin", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Save_Button.ForeColor = System.Drawing.Color.Black;
-            this.Save_Button.Location = new System.Drawing.Point(178, 393);
+            this.Save_Button.Location = new System.Drawing.Point(182, 414);
             this.Save_Button.Name = "Save_Button";
             this.Save_Button.Size = new System.Drawing.Size(141, 46);
             this.Save_Button.TabIndex = 2;
@@ -162,7 +169,7 @@ namespace dither
             "Normal",
             "StretchImage",
             "CenterImage (Default)"});
-            this.SizeModBox.Location = new System.Drawing.Point(331, 326);
+            this.SizeModBox.Location = new System.Drawing.Point(335, 347);
             this.SizeModBox.Name = "SizeModBox";
             this.SizeModBox.Size = new System.Drawing.Size(153, 21);
             this.SizeModBox.TabIndex = 7;
@@ -172,19 +179,65 @@ namespace dither
             // LoadBox
             // 
             this.LoadBox.Image = ((System.Drawing.Image)(resources.GetObject("LoadBox.Image")));
-            this.LoadBox.Location = new System.Drawing.Point(438, 393);
+            this.LoadBox.Location = new System.Drawing.Point(442, 414);
             this.LoadBox.Name = "LoadBox";
             this.LoadBox.Size = new System.Drawing.Size(46, 46);
             this.LoadBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.LoadBox.TabIndex = 8;
             this.LoadBox.TabStop = false;
             // 
+            // PerSentCouner
+            // 
+            this.PerSentCouner.AutoSize = true;
+            this.PerSentCouner.Location = new System.Drawing.Point(12, 9);
+            this.PerSentCouner.Name = "PerSentCouner";
+            this.PerSentCouner.Size = new System.Drawing.Size(148, 13);
+            this.PerSentCouner.TabIndex = 1;
+            this.PerSentCouner.Text = "Number of rendered pixels : 0.";
+            // 
+            // PerSentTimer
+            // 
+            this.PerSentTimer.Enabled = true;
+            this.PerSentTimer.Interval = 200;
+            this.PerSentTimer.Tick += new System.EventHandler(this.PerSentTimer_Tick);
+            // 
+            // WidthLabel
+            // 
+            this.WidthLabel.AutoSize = true;
+            this.WidthLabel.Location = new System.Drawing.Point(332, 9);
+            this.WidthLabel.Name = "WidthLabel";
+            this.WidthLabel.Size = new System.Drawing.Size(44, 13);
+            this.WidthLabel.TabIndex = 9;
+            this.WidthLabel.Text = "Width : ";
+            // 
+            // HeightLabel
+            // 
+            this.HeightLabel.AutoSize = true;
+            this.HeightLabel.Location = new System.Drawing.Point(439, 9);
+            this.HeightLabel.Name = "HeightLabel";
+            this.HeightLabel.Size = new System.Drawing.Size(47, 13);
+            this.HeightLabel.TabIndex = 10;
+            this.HeightLabel.Text = "Height : ";
+            // 
+            // PixelLable
+            // 
+            this.PixelLable.AutoSize = true;
+            this.PixelLable.Location = new System.Drawing.Point(532, 9);
+            this.PixelLable.Name = "PixelLable";
+            this.PixelLable.Size = new System.Drawing.Size(69, 13);
+            this.PixelLable.TabIndex = 11;
+            this.PixelLable.Text = "Pixel Count : ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(653, 451);
+            this.ClientSize = new System.Drawing.Size(653, 482);
+            this.Controls.Add(this.PixelLable);
+            this.Controls.Add(this.HeightLabel);
+            this.Controls.Add(this.WidthLabel);
+            this.Controls.Add(this.PerSentCouner);
             this.Controls.Add(this.LoadBox);
             this.Controls.Add(this.SizeModBox);
             this.Controls.Add(this.Method_Selector);
@@ -221,6 +274,11 @@ namespace dither
         private System.Windows.Forms.Button Save_Button;
         private System.Windows.Forms.ComboBox SizeModBox;
         private System.Windows.Forms.PictureBox LoadBox;
+        private System.Windows.Forms.Label PerSentCouner;
+        private System.Windows.Forms.Timer PerSentTimer;
+        private System.Windows.Forms.Label WidthLabel;
+        private System.Windows.Forms.Label HeightLabel;
+        private System.Windows.Forms.Label PixelLable;
     }
 }
 
