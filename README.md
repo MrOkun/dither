@@ -1,4 +1,4 @@
-# dither
+# Floyd-Steinberg dithering
 
 Floyd-Steinberg dithering for godlike OS - Windows 10, written on c# (WinForms).
 
