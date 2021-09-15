@@ -19,6 +19,7 @@ namespace dither
         private bool _DoBW = true;
         private bool _dithering = false;
         private int _DoPer = 0;
+        private double _progress = 0;
 
         private Bitmap _primordialImage = new Bitmap("standart.png", true);
         private Bitmap _modifiedImage = new Bitmap("standart.png", true);
@@ -28,6 +29,7 @@ namespace dither
             InitializeComponent();
 
             LoadBox.Visible = false;
+            ProgressBar.Visible = false;
 
             Primordial_Image.Image = new Bitmap(_path, true);
             Modified_Image.Image = new Bitmap(_path, true);
@@ -40,6 +42,7 @@ namespace dither
             WidthLabel.Text = $"Width : {_modifiedImage.Width}px";
             HeightLabel.Text = $"Heigt : {_modifiedImage.Height}px";
             PixelLable.Text = $"Pixel Count : {_modifiedImage.Width * _modifiedImage.Height}px";
+            ProgressBar.Maximum = _modifiedImage.Width * _modifiedImage.Height;
         }
 
         private void Dither_Click(object sender, EventArgs e)
@@ -61,6 +64,8 @@ namespace dither
                 Debug.WriteLine("Проверку прошёл!");
 
                 LoadBox.Visible = true;
+                ProgressBar.Visible = true;
+
                 _dithering = true;
 
                 Thread thread = new Thread(
@@ -91,6 +96,7 @@ namespace dither
         private void makeDithered(Bitmap img1, int steps)
         {
             _DoPer = 0;
+            _progress = 0;
             int x, y;
 
             Bitmap img = (Bitmap)img1.Clone();
@@ -116,6 +122,7 @@ namespace dither
 
                     distributeError(img, x, y, errR, errG, errB);
                     _DoPer += 1;
+                    _progress += 1;
                 }
                 
             }
@@ -199,6 +206,7 @@ namespace dither
                 WidthLabel.Text = $"Width : {_modifiedImage.Width}px";
                 HeightLabel.Text = $"Heigt : {_modifiedImage.Height}px";
                 PixelLable.Text = $"Pixel Count : {_modifiedImage.Width * _modifiedImage.Height}px";
+                ProgressBar.Maximum = _modifiedImage.Width * _modifiedImage.Height;
             }
             else
             {
@@ -262,6 +270,7 @@ namespace dither
             if (!_dithering)
             {
                 LoadBox.Visible = false;
+                ProgressBar.Visible = false;
                 //PerSentCouner.Visible = false;
             }
         }
@@ -269,6 +278,7 @@ namespace dither
         private void PerSentTimer_Tick(object sender, EventArgs e)
         {
             PerSentCouner.Text = $"Number of rendered pixels : {_DoPer}.";
+            ProgressBar.Value = _DoPer;
         }
     }
 }

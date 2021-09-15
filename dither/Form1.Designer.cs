@@ -47,6 +47,7 @@ namespace dither
             this.WidthLabel = new System.Windows.Forms.Label();
             this.HeightLabel = new System.Windows.Forms.Label();
             this.PixelLable = new System.Windows.Forms.Label();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.Primordia_Image_Plane.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Primordial_Image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).BeginInit();
@@ -153,7 +154,7 @@ namespace dither
             this.Save_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Save_Button.Font = new System.Drawing.Font("Montserrat Thin", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Save_Button.ForeColor = System.Drawing.Color.Black;
-            this.Save_Button.Location = new System.Drawing.Point(182, 414);
+            this.Save_Button.Location = new System.Drawing.Point(166, 414);
             this.Save_Button.Name = "Save_Button";
             this.Save_Button.Size = new System.Drawing.Size(141, 46);
             this.Save_Button.TabIndex = 2;
@@ -179,7 +180,7 @@ namespace dither
             // LoadBox
             // 
             this.LoadBox.Image = ((System.Drawing.Image)(resources.GetObject("LoadBox.Image")));
-            this.LoadBox.Location = new System.Drawing.Point(442, 414);
+            this.LoadBox.Location = new System.Drawing.Point(449, 414);
             this.LoadBox.Name = "LoadBox";
             this.LoadBox.Size = new System.Drawing.Size(46, 46);
             this.LoadBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -228,12 +229,22 @@ namespace dither
             this.PixelLable.TabIndex = 11;
             this.PixelLable.Text = "Pixel Count : ";
             // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Enabled = false;
+            this.ProgressBar.Location = new System.Drawing.Point(501, 392);
+            this.ProgressBar.MarqueeAnimationSpeed = 1;
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(141, 16);
+            this.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.ProgressBar.TabIndex = 12;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(653, 482);
+            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.PixelLable);
             this.Controls.Add(this.HeightLabel);
             this.Controls.Add(this.WidthLabel);
@@ -248,6 +259,7 @@ namespace dither
             this.Controls.Add(this.Modified_Image_Plane);
             this.Controls.Add(this.Primordia_Image_Plane);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Dither";
             this.Primordia_Image_Plane.ResumeLayout(false);
@@ -279,6 +291,7 @@ namespace dither
         private System.Windows.Forms.Label WidthLabel;
         private System.Windows.Forms.Label HeightLabel;
         private System.Windows.Forms.Label PixelLable;
+        private System.Windows.Forms.ProgressBar ProgressBar;
     }
 }
 
