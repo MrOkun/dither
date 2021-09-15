@@ -1,4 +1,4 @@
-# dither
+# Floyd-Steinberg dithering
 
 Floyd-Steinberg dithering for godlike OS - Windows 10, written on c# (WinForms).
 
@@ -8,7 +8,7 @@ Screenshots :
 
 Programm screenshot :
 
-![Alt text](http://images.vfl.ru/ii/1630868055/993a455f/35747653.png "Program")
+![Alt text](http://images.vfl.ru/ii/1631216334/6aeb0d25/35801989.png "Program")
 
 Powered by Windows Forms with C-Sharp Language.
 
