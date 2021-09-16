@@ -100,7 +100,7 @@ namespace dither
             this.Load_Button.BackColor = System.Drawing.Color.White;
             this.Load_Button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Load_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Load_Button.Font = new System.Drawing.Font("Montserrat Thin", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Load_Button.Font = new System.Drawing.Font("Montserrat Light", 14.25F);
             this.Load_Button.ForeColor = System.Drawing.Color.Black;
             this.Load_Button.Location = new System.Drawing.Point(19, 414);
             this.Load_Button.Name = "Load_Button";
@@ -115,7 +115,7 @@ namespace dither
             this.Dither.BackColor = System.Drawing.Color.White;
             this.Dither.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Dither.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Dither.Font = new System.Drawing.Font("Montserrat Thin", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Dither.Font = new System.Drawing.Font("Montserrat Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dither.ForeColor = System.Drawing.Color.Black;
             this.Dither.Location = new System.Drawing.Point(501, 414);
             this.Dither.Name = "Dither";
@@ -139,9 +139,10 @@ namespace dither
             // Method_Selector
             // 
             this.Method_Selector.AutoSize = true;
-            this.Method_Selector.Location = new System.Drawing.Point(559, 349);
+            this.Method_Selector.Font = new System.Drawing.Font("Montserrat Light", 14.25F);
+            this.Method_Selector.Location = new System.Drawing.Point(529, 349);
             this.Method_Selector.Name = "Method_Selector";
-            this.Method_Selector.Size = new System.Drawing.Size(68, 17);
+            this.Method_Selector.Size = new System.Drawing.Size(113, 30);
             this.Method_Selector.TabIndex = 5;
             this.Method_Selector.Text = "B and W";
             this.Method_Selector.UseVisualStyleBackColor = true;
@@ -152,7 +153,7 @@ namespace dither
             this.Save_Button.BackColor = System.Drawing.Color.White;
             this.Save_Button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Save_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Save_Button.Font = new System.Drawing.Font("Montserrat Thin", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Save_Button.Font = new System.Drawing.Font("Montserrat Light", 14.25F);
             this.Save_Button.ForeColor = System.Drawing.Color.Black;
             this.Save_Button.Location = new System.Drawing.Point(166, 414);
             this.Save_Button.Name = "Save_Button";
@@ -165,6 +166,7 @@ namespace dither
             // SizeModBox
             // 
             this.SizeModBox.DisplayMember = "3";
+            this.SizeModBox.Font = new System.Drawing.Font("Montserrat Light", 8F);
             this.SizeModBox.FormattingEnabled = true;
             this.SizeModBox.Items.AddRange(new object[] {
             "Normal",
@@ -172,7 +174,7 @@ namespace dither
             "CenterImage (Default)"});
             this.SizeModBox.Location = new System.Drawing.Point(335, 347);
             this.SizeModBox.Name = "SizeModBox";
-            this.SizeModBox.Size = new System.Drawing.Size(153, 21);
+            this.SizeModBox.Size = new System.Drawing.Size(153, 23);
             this.SizeModBox.TabIndex = 7;
             this.SizeModBox.Text = "CenterImage (Default)";
             this.SizeModBox.SelectedIndexChanged += new System.EventHandler(this.SizeModBox_SelectedIndexChanged);
@@ -190,9 +192,10 @@ namespace dither
             // PerSentCouner
             // 
             this.PerSentCouner.AutoSize = true;
+            this.PerSentCouner.Font = new System.Drawing.Font("Montserrat Light", 8F);
             this.PerSentCouner.Location = new System.Drawing.Point(12, 9);
             this.PerSentCouner.Name = "PerSentCouner";
-            this.PerSentCouner.Size = new System.Drawing.Size(148, 13);
+            this.PerSentCouner.Size = new System.Drawing.Size(171, 15);
             this.PerSentCouner.TabIndex = 1;
             this.PerSentCouner.Text = "Number of rendered pixels : 0.";
             // 
@@ -205,27 +208,30 @@ namespace dither
             // WidthLabel
             // 
             this.WidthLabel.AutoSize = true;
-            this.WidthLabel.Location = new System.Drawing.Point(332, 9);
+            this.WidthLabel.Font = new System.Drawing.Font("Montserrat Light", 8F);
+            this.WidthLabel.Location = new System.Drawing.Point(298, 9);
             this.WidthLabel.Name = "WidthLabel";
-            this.WidthLabel.Size = new System.Drawing.Size(44, 13);
+            this.WidthLabel.Size = new System.Drawing.Size(48, 15);
             this.WidthLabel.TabIndex = 9;
             this.WidthLabel.Text = "Width : ";
             // 
             // HeightLabel
             // 
             this.HeightLabel.AutoSize = true;
-            this.HeightLabel.Location = new System.Drawing.Point(439, 9);
+            this.HeightLabel.Font = new System.Drawing.Font("Montserrat Light", 8F);
+            this.HeightLabel.Location = new System.Drawing.Point(405, 9);
             this.HeightLabel.Name = "HeightLabel";
-            this.HeightLabel.Size = new System.Drawing.Size(47, 13);
+            this.HeightLabel.Size = new System.Drawing.Size(53, 15);
             this.HeightLabel.TabIndex = 10;
             this.HeightLabel.Text = "Height : ";
             // 
             // PixelLable
             // 
             this.PixelLable.AutoSize = true;
-            this.PixelLable.Location = new System.Drawing.Point(532, 9);
+            this.PixelLable.Font = new System.Drawing.Font("Montserrat Light", 8F);
+            this.PixelLable.Location = new System.Drawing.Point(498, 9);
             this.PixelLable.Name = "PixelLable";
-            this.PixelLable.Size = new System.Drawing.Size(69, 13);
+            this.PixelLable.Size = new System.Drawing.Size(78, 15);
             this.PixelLable.TabIndex = 11;
             this.PixelLable.Text = "Pixel Count : ";
             // 
