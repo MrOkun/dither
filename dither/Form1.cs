@@ -278,6 +278,8 @@ namespace dither
         private void PerSentTimer_Tick(object sender, EventArgs e)
         {
             PerSentCouner.Text = $"Number of rendered pixels : {_DoPer}.";
+            
+            ProgressBar.Maximum = Primordial_Image.Image.Width * Primordial_Image.Image.Height;
             ProgressBar.Value = _DoPer;
         }
     }
