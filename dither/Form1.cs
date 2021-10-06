@@ -250,8 +250,6 @@ namespace dither
             {
                 OPF.Dispose();
             }
-
-            Standart.Text = $"{Modified_Image.Image.PixelFormat}";
         }
 
         private void Save_Button_Click(object sender, EventArgs e)
