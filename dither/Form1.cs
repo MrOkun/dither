@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using FastBitmapLib;
+using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace dither
@@ -24,10 +20,17 @@ namespace dither
         private Bitmap _primordialImage = new Bitmap("standart.png", true);
         private Bitmap _modifiedImage = new Bitmap("standart.png", true);
 
+        private FastBitmap fastBitmap;
+
         public Form1()
         {
             InitializeComponent();
 
+            Start();
+        }
+
+        private void Start()
+        {
             LoadBox.Visible = false;
             ProgressBar.Visible = false;
 
@@ -77,6 +80,10 @@ namespace dither
                 Debug.WriteLine("Проверку не прошёл!");
             }
 
+            _dithering = false;
+            LoadBox.Visible = false;
+            ProgressBar.Visible = false;
+
             /*
             Thread thread = new Thread(
         () => makeDithered(_modifiedImage, factor));
@@ -99,13 +106,43 @@ namespace dither
             _progress = 0;
             int x, y;
 
-            Bitmap img = (Bitmap)img1.Clone();
 
-            for (y = 0; y < img.Height; y++)
+            Bitmap img = (Bitmap)img1.Clone();
+            
+            FastBitmap fastBitmap;
+
+            Bitmap orig = (Bitmap)img.Clone();
+            Bitmap clone = new Bitmap(orig.Width, orig.Height,
+                System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+
+            using (Graphics gr = Graphics.FromImage(clone))
             {
-                for (x = 0; x < img.Width; x++)
+                gr.DrawImage(orig, new Rectangle(0, 0, clone.Width, clone.Height));
+            }
+
+            img = (Bitmap)clone.Clone();
+
+            try
+            {
+                fastBitmap = new FastBitmap(img);
+            }
+            catch
+            {
+                string message = "The provided bitmap must have a 32bpp depth.";
+                string title = "Error";
+                MessageBox.Show(message, title);
+                return;
+            }
+            
+
+            fastBitmap.Lock();
+
+
+            for (y = 0; y < fastBitmap.Height; y++)
+            {
+                for (x = 0; x < fastBitmap.Width; x++)
                 {
-                    var clr = img.GetPixel(x, y);
+                    var clr = fastBitmap.GetPixel(x, y);
                     var oldR = clr.R;
                     var oldG = clr.G;
                     var oldB = clr.B;
@@ -114,13 +151,13 @@ namespace dither
                     var newB = closestStep(255, steps, oldB);
 
                     var newClr = Color.FromArgb((int)newR, (int)newG, (int)newB);
-                    img.SetPixel(x, y, newClr);
+                    fastBitmap.SetPixel(x, y, newClr);
 
                     var errR = oldR - newR;
                     var errG = oldG - newG;
                     var errB = oldB - newB;
 
-                    distributeError(img, x, y, errR, errG, errB);
+                    distributeError(fastBitmap, x, y, errR, errG, errB);
                     _DoPer += 1;
                     _progress += 1;
                 }
@@ -130,38 +167,39 @@ namespace dither
 
             if (!_DoBW)
             {
-                for (x = 0; x < img.Width; x++)
+                for (x = 0; x < fastBitmap.Width; x++)
                 {
-                    for (y = 0; y < img.Height; y++)
+                    for (y = 0; y < fastBitmap.Height; y++)
                     {
-                        Color pixelColor = img.GetPixel(x, y);
+                        Color pixelColor = fastBitmap.GetPixel(x, y);
                         var grayscaleColor = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
 
                         Color newColor = Color.FromArgb(grayscaleColor, grayscaleColor, grayscaleColor);
 
-                        img.SetPixel(x, y, newColor);
+                        fastBitmap.SetPixel(x, y, newColor);
                     }
                 }
             }
 
+            fastBitmap.Unlock();
 
             Modified_Image.Image = img;
 
             _dithering = false;
         }
 
-        private void distributeError(Bitmap img, int x, int y, double errR, double errG, double errB)
+        private void distributeError(FastBitmap fastBitmap, int x, int y, double errR, double errG, double errB)
         {
-            addError(img, 7 / 16.0, x + 1, y, errR, errG, errB);
-            addError(img, 3 / 16.0, x - 1, y + 1, errR, errG, errB);
-            addError(img, 5 / 16.0, x, y + 1, errR, errG, errB);
-            addError(img, 1 / 16.0, x + 1, y + 1, errR, errG, errB);
+            addError(fastBitmap, 7 / 16.0, x + 1, y, errR, errG, errB);
+            addError(fastBitmap, 3 / 16.0, x - 1, y + 1, errR, errG, errB);
+            addError(fastBitmap, 5 / 16.0, x, y + 1, errR, errG, errB);
+            addError(fastBitmap, 1 / 16.0, x + 1, y + 1, errR, errG, errB);
         }
 
-        private void addError(Bitmap img, double factor, int x, int y, double errR, double errG, double errB)
+        private void addError(FastBitmap fastBitmap, double factor, int x, int y, double errR, double errG, double errB)
         {
-            if (x < 0 || x >= img.Width || y < 0 || y >= img.Height) return;
-            var clr = img.GetPixel(x, y);
+            if (x < 0 || x >= fastBitmap.Width || y < 0 || y >= fastBitmap.Height) return;
+            var clr = fastBitmap.GetPixel(x, y);
             var r = clr.R;
             var g = clr.G;
             var b = clr.B;
@@ -185,7 +223,7 @@ namespace dither
 
             var newClr = Color.FromArgb(Red, Green, Blue);
 
-            img.SetPixel(x, y, newClr);
+            fastBitmap.SetPixel(x, y, newClr);
         }
 
         private void Load_Button_Click(object sender, EventArgs e)
@@ -212,6 +250,8 @@ namespace dither
             {
                 OPF.Dispose();
             }
+
+            Standart.Text = $"{Modified_Image.Image.PixelFormat}";
         }
 
         private void Save_Button_Click(object sender, EventArgs e)
@@ -278,9 +318,17 @@ namespace dither
         private void PerSentTimer_Tick(object sender, EventArgs e)
         {
             PerSentCouner.Text = $"Number of rendered pixels : {_DoPer}.";
-            
             ProgressBar.Maximum = Primordial_Image.Image.Width * Primordial_Image.Image.Height;
-            ProgressBar.Value = _DoPer;
+            try
+            {
+                ProgressBar.Value = _DoPer;
+            }
+            catch
+            {
+                Debug.WriteLine($"Do per - {_DoPer}");
+                Debug.WriteLine($"Max - {ProgressBar.Maximum}");
+                Debug.WriteLine($"All - {Primordial_Image.Image.Width * Primordial_Image.Image.Height}");
+            }
         }
     }
 }
