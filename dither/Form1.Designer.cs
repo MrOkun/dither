@@ -48,6 +48,7 @@ namespace dither
             this.HeightLabel = new System.Windows.Forms.Label();
             this.PixelLable = new System.Windows.Forms.Label();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.Standart = new System.Windows.Forms.Label();
             this.Primordia_Image_Plane.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Primordial_Image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).BeginInit();
@@ -245,11 +246,21 @@ namespace dither
             this.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.ProgressBar.TabIndex = 12;
             // 
+            // Standart
+            // 
+            this.Standart.AutoSize = true;
+            this.Standart.Location = new System.Drawing.Point(16, 392);
+            this.Standart.Name = "Standart";
+            this.Standart.Size = new System.Drawing.Size(64, 13);
+            this.Standart.TabIndex = 13;
+            this.Standart.Text = "Pixel Format";
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(653, 482);
+            this.Controls.Add(this.Standart);
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.PixelLable);
             this.Controls.Add(this.HeightLabel);
@@ -267,7 +278,7 @@ namespace dither
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Dither";
+            this.Text = "Dither - Test";
             this.Primordia_Image_Plane.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Primordial_Image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).EndInit();
@@ -298,6 +309,7 @@ namespace dither
         private System.Windows.Forms.Label HeightLabel;
         private System.Windows.Forms.Label PixelLable;
         private System.Windows.Forms.ProgressBar ProgressBar;
+        private System.Windows.Forms.Label Standart;
     }
 }
 

@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -104,11 +105,22 @@ namespace dither
             _DoPer = 0;
             _progress = 0;
             int x, y;
-            
 
 
             Bitmap img = (Bitmap)img1.Clone();
+            
             FastBitmap fastBitmap;
+
+            Bitmap orig = (Bitmap)img.Clone();
+            Bitmap clone = new Bitmap(orig.Width, orig.Height,
+                System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+
+            using (Graphics gr = Graphics.FromImage(clone))
+            {
+                gr.DrawImage(orig, new Rectangle(0, 0, clone.Width, clone.Height));
+            }
+
+            img = (Bitmap)clone.Clone();
 
             try
             {
@@ -121,6 +133,7 @@ namespace dither
                 MessageBox.Show(message, title);
                 return;
             }
+            
 
             fastBitmap.Lock();
 
@@ -237,6 +250,8 @@ namespace dither
             {
                 OPF.Dispose();
             }
+
+            Standart.Text = $"{Modified_Image.Image.PixelFormat}";
         }
 
         private void Save_Button_Click(object sender, EventArgs e)
