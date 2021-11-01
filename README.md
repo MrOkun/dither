@@ -1,5 +1,7 @@
 # Floyd-Steinberg dithering
 
+![Github CI/CD](https://img.shields.io/github/repo-size/MrOkun/dither?color=Green&label=Size)
+
 Floyd-Steinberg dithering for godlike OS - Windows 10, written on c# (WinForms).
 
 Screenshots : 
